@@ -1,0 +1,26 @@
+name: test
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  install:
+    strategy:
+      matrix:
+        os: [macos-15, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+    steps:
+      - uses: actions/checkout@v7
+      - run: |
+          if brew command trust >/dev/null 2>&1; then
+            brew trust --formula kaihendry/tap/annotate
+          fi
+          brew tap kaihendry/tap "$GITHUB_WORKSPACE"
+      - run: brew install --build-from-source kaihendry/tap/annotate
+      - run: brew test kaihendry/tap/annotate
