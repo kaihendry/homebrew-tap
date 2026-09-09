@@ -1,10 +1,9 @@
 class Annotate < Formula
   desc "Screenshot annotation with boxes, arrows, and text"
   homepage "https://github.com/kaihendry/annotate"
-  url "https://github.com/kaihendry/annotate/archive/refs/tags/v1.0.tar.gz"
-  sha256 "3c6e89c4c2170c10d19fb3929d15a674a917e1f8ba47addbffef4b990c207c76"
+  url "https://github.com/kaihendry/annotate/archive/refs/tags/v1.1.tar.gz"
+  sha256 "7b7f906d58729c125912d7947e8e2d0eb0b46518d1b0fc23b131c162a6072acd"
   license "MIT"
-  revision 1
 
   depends_on :macos
   uses_from_macos "swift" => :build
