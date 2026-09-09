@@ -9,11 +9,13 @@ brew install kaihendry/tap/annotate
 [Annotate](https://github.com/kaihendry/annotate) draws boxes, arrows, and text
 on screenshots. The formula builds from a checksummed source release using
 Apple's Command Line Tools, which Homebrew normally installs during setup.
-It installs both the `annotate` command and `Annotate.app`; no `sudo` is needed.
+It installs both the `annotate-screenshot` command and `Annotate.app`; no `sudo`
+is needed. The command name avoids a collision with the `annotate` utility
+provided by Homebrew's `gd` package.
 
 ```sh
-annotate                 # load a screenshot from the clipboard
-annotate screenshot.png  # open an existing image
+annotate-screenshot                 # load a screenshot from the clipboard
+annotate-screenshot screenshot.png  # open an existing image
 ```
 
 For Finder and Spotlight, optionally link the app into your Applications folder:

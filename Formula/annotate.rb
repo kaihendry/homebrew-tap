@@ -4,6 +4,7 @@ class Annotate < Formula
   url "https://github.com/kaihendry/annotate/archive/refs/tags/v1.0.tar.gz"
   sha256 "3c6e89c4c2170c10d19fb3929d15a674a917e1f8ba47addbffef4b990c207c76"
   license "MIT"
+  revision 1
 
   depends_on :macos
   uses_from_macos "swift" => :build
@@ -12,11 +13,12 @@ class Annotate < Formula
     system "make", "app"
     prefix.install "Annotate.app"
     bin.write_exec_script prefix/"Annotate.app/Contents/MacOS/annotate"
+    mv bin/"annotate", bin/"annotate-screenshot" # Avoid the annotate command from gd.
   end
 
   def caveats
     <<~EOS
-      Run `annotate` to start, or `annotate image.png` to open an image.
+      Run `annotate-screenshot` to start, or `annotate-screenshot image.png` to open an image.
 
       To add Annotate to Finder and Spotlight:
         mkdir -p ~/Applications
@@ -26,7 +28,7 @@ class Annotate < Formula
 
   test do
     output = testpath/"annotated.png"
-    system bin/"annotate", test_fixtures("test.png"),
+    system bin/"annotate-screenshot", test_fixtures("test.png"),
            "--box", "1,1,8,8", "--arrow", "1,1,8,8",
            "--text", "1,1,Homebrew", "--out", output
     assert_path_exists output
