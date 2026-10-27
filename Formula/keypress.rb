@@ -2,14 +2,18 @@ class Keypress < Formula
   desc "Menu bar stopwatch for input actions and pointing difficulty"
   homepage "https://github.com/kaihendry/keypress"
   url "https://github.com/kaihendry/keypress/releases/download/v0.1.0/keypress-0.1.0.tar.gz"
-  sha256 "501a8e293c360580a366db502eb943b0b8137349a4795785e32eeaedab3f01e6"
+  sha256 "1909200f66cbb2cc2c0eef9db1495c5435e7dc5aadfa245f2aa0842091a9be04"
   license "MIT"
 
   depends_on :macos
   uses_from_macos "swift" => :build
 
   def install
-    system "make", "build"
+    # Homebrew already sandboxes the build; macOS cannot nest sandbox-exec profiles.
+    system "./scripts/build.sh", "--disable-sandbox",
+           "--cache-path", buildpath/".build/cache",
+           "--config-path", buildpath/".build/configuration",
+           "--security-path", buildpath/".build/security"
     prefix.install "build/Keypress.app"
     (bin/"keypress").write <<~SH
       #!/bin/bash
@@ -35,7 +39,7 @@ class Keypress < Formula
   end
 
   test do
-    assert_match "Keypress #{version} (git a91bca3ccfd5)", shell_output("#{bin}/keypress --version")
+    assert_match "Keypress #{version} (git 43793e585eca)", shell_output("#{bin}/keypress --version")
     assert_match "Usage:", shell_output("#{bin}/keypress --help")
     system "/usr/bin/codesign", "--verify", "--deep", "--strict", prefix/"Keypress.app"
   end
