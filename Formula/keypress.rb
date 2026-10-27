@@ -1,8 +1,8 @@
 class Keypress < Formula
-  desc "Menu bar stopwatch for input actions and pointing difficulty"
+  desc "Menu bar action counter with APM and pointing difficulty"
   homepage "https://github.com/kaihendry/keypress"
-  url "https://github.com/kaihendry/keypress/releases/download/v0.1.1/keypress-0.1.1.tar.gz"
-  sha256 "8b1d4289cbfe2c4944ce00ea2fcef6c2a5906921c0369f2747e6f86400fe7873"
+  url "https://github.com/kaihendry/keypress/releases/download/v0.1.2/keypress-0.1.2.tar.gz"
+  sha256 "330b5025bbb481030a633481e5a7d65336a61d2e721ab1f34d5926ac4e898347"
   license "MIT"
 
   depends_on :macos
@@ -26,7 +26,7 @@ class Keypress < Formula
 
   def caveats
     <<~EOS
-      Run `keypress` to open the menu bar stopwatch.
+      Run `keypress` to open the menu bar action counter and APM display.
       Enable Accessibility and Input Monitoring for Keypress when prompted.
 
       To add Keypress to Finder and Spotlight:
@@ -39,7 +39,7 @@ class Keypress < Formula
   end
 
   test do
-    assert_match "Keypress #{version} (git 1df9b53b484c)", shell_output("#{bin}/keypress --version")
+    assert_match "Keypress #{version} (git 2e72bc82592e)", shell_output("#{bin}/keypress --version")
     assert_match "Usage:", shell_output("#{bin}/keypress --help")
     assert_path_exists prefix/"Keypress.app/Contents/Resources/Keypress.icns"
     system "/usr/bin/codesign", "--verify", "--deep", "--strict", prefix/"Keypress.app"

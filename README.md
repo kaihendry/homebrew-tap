@@ -36,8 +36,8 @@ brew install kaihendry/tap/keypress
 keypress
 ```
 
-[Keypress](https://github.com/kaihendry/keypress) is a menu bar stopwatch for
-keyboard actions, clicks, scroll strokes, and observed gestures, with a Fitts's-law
+[Keypress](https://github.com/kaihendry/keypress) is a menu bar activity counter with
+recent APM, a task stopwatch, keyboard actions, clicks, scroll strokes, and observed gestures, with a Fitts's-law
 pointing-difficulty estimate. It builds from a checksummed source release using
 Apple's Swift 6+ toolchain. Enable Accessibility and Input Monitoring on first use.
 
