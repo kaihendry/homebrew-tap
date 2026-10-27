@@ -1,8 +1,8 @@
 class Keypress < Formula
   desc "Menu bar stopwatch for input actions and pointing difficulty"
   homepage "https://github.com/kaihendry/keypress"
-  url "https://github.com/kaihendry/keypress/releases/download/v0.1.0/keypress-0.1.0.tar.gz"
-  sha256 "1909200f66cbb2cc2c0eef9db1495c5435e7dc5aadfa245f2aa0842091a9be04"
+  url "https://github.com/kaihendry/keypress/releases/download/v0.1.1/keypress-0.1.1.tar.gz"
+  sha256 "8b1d4289cbfe2c4944ce00ea2fcef6c2a5906921c0369f2747e6f86400fe7873"
   license "MIT"
 
   depends_on :macos
@@ -39,8 +39,9 @@ class Keypress < Formula
   end
 
   test do
-    assert_match "Keypress #{version} (git 43793e585eca)", shell_output("#{bin}/keypress --version")
+    assert_match "Keypress #{version} (git 1df9b53b484c)", shell_output("#{bin}/keypress --version")
     assert_match "Usage:", shell_output("#{bin}/keypress --help")
+    assert_path_exists prefix/"Keypress.app/Contents/Resources/Keypress.icns"
     system "/usr/bin/codesign", "--verify", "--deep", "--strict", prefix/"Keypress.app"
   end
 end
