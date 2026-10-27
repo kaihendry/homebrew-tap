@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-15, macos-15-intel]
+        formula: [annotate, keypress]
     runs-on: ${{ matrix.os }}
     env:
       HOMEBREW_NO_AUTO_UPDATE: 1
@@ -19,8 +20,8 @@ jobs:
       - uses: actions/checkout@v7
       - run: |
           if brew command trust >/dev/null 2>&1; then
-            brew trust --formula kaihendry/tap/annotate
+            brew trust --formula kaihendry/tap/${{ matrix.formula }}
           fi
           brew tap kaihendry/tap "$GITHUB_WORKSPACE"
-      - run: brew install --build-from-source kaihendry/tap/annotate
-      - run: brew test kaihendry/tap/annotate
+      - run: brew install --build-from-source kaihendry/tap/${{ matrix.formula }}
+      - run: brew test kaihendry/tap/${{ matrix.formula }}
